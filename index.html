@@ -1,13 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Solar System</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div id="canvas-container">
+        <!-- Three.js canvas will be inserted here -->
+    </div>
+
+    <div id="controls">
+        <h3>🚀 Solar System Controls</h3>
+        
+        <div class="control-group">
+            <label for="theme-toggle">Theme:</label>
+            <button id="theme-toggle">🌙 Dark Mode</button>
+        </div>
+        
+        <div class="control-group">
+            <label for="global-speed">Global Speed:</label>
+            <input type="range" id="global-speed" min="0" max="5" value="1" step="0.1">
+        </div>
+        
+        <div class="control-group">
+            <label for="pause-btn">Animation:</label>
+            <button id="pause-btn">⏸️ Pause</button>
+        </div>
+        
+        <div class="control-group">
+            <h4>🪐 Individual Planets</h4>
+            <div id="planet-controls">
+                <!-- Planet controls will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="info">
+        <p>🌟 Interactive 3D Solar System</p>
+        <p>Left mouse: Rotate view | Right mouse: Pan | Scroll: Zoom</p>
+        <p>Status: <span id="status">Loading...</span></p>
+    </div>
+
+    <!-- Tooltip for planet information -->
+    <div id="planet-tooltip" class="tooltip">
+        <div id="tooltip-content"></div>
+    </div>
+
+    <!-- Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="src/main.js"></script>
+</body>
 </html>

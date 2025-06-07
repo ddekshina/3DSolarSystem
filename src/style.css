@@ -1,96 +1,248 @@
+/* ===== CSS VARIABLES FOR THEMING ===== */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #aaaaaa;
+    --control-bg: rgba(0, 0, 0, 0.8);
+    --control-border: rgba(255, 255, 255, 0.1);
+    --button-bg: #4CAF50;
+    --button-hover: #45a049;
+    --slider-bg: #333333;
+    --slider-thumb: #4CAF50;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+[data-theme="light"] {
+    --bg-color: #f0f0f0;
+    --text-color: #000000;
+    --text-secondary: #333333;
+    --text-muted: #555555;
+    --control-bg: rgba(255, 255, 255, 0.9);
+    --control-border: rgba(0, 0, 0, 0.1);
+    --button-bg: #2196F3;
+    --button-hover: #1976D2;
+    --slider-bg: #dddddd;
+    --slider-thumb: #2196F3;
 }
-a:hover {
-  color: #535bf2;
+
+/* ===== RESET AND BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ===== CANVAS CONTAINER ===== */
+#canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+canvas {
+    display: block;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* ===== CONTROLS PANEL ===== */
+#controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--control-bg);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--control-border);
+    max-width: 320px;
+    max-height: 70vh;
+    overflow-y: auto;
+    z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group h4 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.planet-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 10px;
+}
+
+.planet-name {
+    min-width: 80px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.planet-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--slider-bg);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    flex: 1;
+    transition: background-color 0.3s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+/* ===== BUTTONS ===== */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+    background: var(--button-hover);
+}
+
+/* ===== INFO PANEL ===== */
+#info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: var(--control-bg);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--control-border);
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== TOOLTIP STYLES ===== */
+.tooltip {
+    position: absolute;
+    background: var(--control-bg);
+    color: var(--text-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--control-border);
+    font-size: 14px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    max-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tooltip h4 {
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.tooltip p {
+    margin: 4px 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.tooltip .planet-info {
+    border-left: 3px solid;
+    padding-left: 8px;
+    margin-top: 8px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    #controls {
+        width: calc(100vw - 40px);
+        max-width: none;
+        max-height: 60vh;
+    }
+    
+    #info {
+        display: none;
+    }
+    
+    .tooltip {
+        font-size: 12px;
+        padding: 8px 12px;
+        max-width: 150px;
+    }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+#controls::-webkit-scrollbar {
+    width: 6px;
+}
+
+#controls::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+#controls::-webkit-scrollbar-thumb {
+    background: var(--slider-thumb);
+    border-radius: 3px;
+}
+
+#controls::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover);
 }
